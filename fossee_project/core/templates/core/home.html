@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head><title>FOSSEE Python Winter Internship Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            padding: 55px 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-login {
+            background: #3498db;
+            color: white;
+        }
+        .btn-register {
+            background: #2ecc71;
+            color: white;
+        }
+        .btn-login:hover {
+            background: #2980b9;
+        }
+        .btn-register:hover {
+            background: #27ae60;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1> Welcome to FOSSEE Python Winter Internship Portal</h1>
+            <p>Please log in or register to manage your uploads.</p>
+            <div>
+                <a href="{% url 'login' %}" class="btn btn-login">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-register">Create Account</a>
+            </div>
+        </div>
+    </body>
+</html>

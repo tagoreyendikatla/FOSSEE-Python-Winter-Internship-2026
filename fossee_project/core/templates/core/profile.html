@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Profile</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 30px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0;
+        }
+        .welcome {
+            color: #666;
+            margin-top: 8px;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-upload {
+            background: #3498db;
+            color: white;
+        }
+        .btn-upload:hover {
+            background: #2980b9;
+        }
+        .btn-logout {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-logout:hover {
+            background: #c0392b;
+        }
+        .message {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            background: #e8f5e9;
+            color: #256029;
+        }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: #f8f9fa;
+            color: #444;
+            font-size: 14px;
+        }
+        td {
+            font-size: 14px;
+            color: #555;
+        }
+        tr:hover td {
+            background: #fafafa;
+        }
+        table a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        table a:hover {
+            text-decoration: underline;
+        }
+        .empty {
+            text-align: center;
+            padding: 30px 10px;
+            color: #777;
+            line-height: 1.6;
+        }
+    </style></head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div>
+                    <h1>My Profile</h1>
+                    <p class="welcome">Hi, {{ request.user.username }}!</p>
+                </div>
+                <div class="actions">
+                    <a href="{% url 'upload' %}" class="btn btn-upload">Upload</a>
+                    <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+                </div>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="card">
+                <h2>Your Uploads</h2>
+                {% if uploads %}
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Event Type</th>
+                                    <th>Event Date</th>
+                                    <th>CSV File</th>
+                                    <th>Uploaded At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for upload in uploads %}
+                                    <tr>
+                                        <td>{{ upload.event_type }}</td>
+                                        <td>{{ upload.event_date }}</td>
+                                        <td><a href="{{ upload.csv_file.url }}" target="_blank">View File</a></td>
+                                        <td>{{ upload.uploaded_at|date:"d M Y, h:i A" }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty">
+                        <p>You haven't uploaded any CSV files yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

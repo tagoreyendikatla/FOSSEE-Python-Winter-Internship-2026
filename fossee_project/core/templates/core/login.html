@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+    <head><title>Login - FOSSEE Portal</title>
+    <style>
+        * {box-sizing: border-box;}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        form p {
+            margin-bottom: 18px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 7px;
+            color: #444;
+            font-weight: bold;
+        }
+        form input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        form input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            background: #e8f5e9;
+            color: #256029;
+            text-align: center;
+            font-size: 14px;
+        }
+        .error {
+            color: #c0392b;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            color: #666;
+            font-size: 14px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Log in to your account</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% if form.errors %}
+                <div class="error">Invalid username or password. Please try again.</div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="footer">
+                Don't have an account?
+                <a href="{% url 'register' %}">Create one</a>
+                <br><br>
+                <a href="{% url 'home' %}">Back to Home</a>
+            </div>
+        </div>
+    </body>
+</html>
