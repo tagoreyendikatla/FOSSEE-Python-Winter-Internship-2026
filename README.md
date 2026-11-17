@@ -41,8 +41,8 @@ fossee_project/
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd task/fossee_project
+git clone https://github.com/tagoreyendikatla/FOSSEE-Python-Winter-Internship-2026.git
+cd FOSSEE-Python-Winter-Internship-2026
 ```
 
 ### 2. Create and activate a virtual environment
@@ -53,14 +53,33 @@ Windows PowerShell:
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
+Linux:
+```wsl
+python3 -m venv venv
+source venv/bin/activate
+```
+### 3. Configure the Django secret key
 
-### 3. Apply database migrations
+Generate a new secret key
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+Set the generated key as an environment variable
+```powershell
+$env:DJANGO_SECRET_KEY = "paste-your-generated-key-here"
+```
+
+```bash
+export DJANGO_SECRET_KEY='paste-your-generated-key-here'
+```
+
+### 4. Apply database migrations
 
 ```bash
 python manage.py migrate
 ```
 
-### 4. Start the development server
+### 5. Start the development server
 
 ```bash
 python manage.py runserver
